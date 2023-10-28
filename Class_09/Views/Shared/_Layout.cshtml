@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <environment>
+        <script src="~/lib/jquery/jquery.js"></script>
+        <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    </environment>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success" style="font-weight:bold;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img style="height: 30px; width: 30px; border-radius: 25px;" src="~/image/isdb.png"/>
+            </a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        @Html.ActionLink("Dashboard", "Index", "Home", new { }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Client", "Index", "Client", new { }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Spot", "Index", "Spot", new { }, new { @class = "nav-link" })
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+    <footer class="container-fluid">
+        <p class="text-center">&copy; @DateTime.Now.Year - www.masumkazi.com</p>
+    </footer>
+    <environment>
+        <script src="~/lib/bootstrap/js/bootstrap.bundle.js"></script>
+        <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    </environment>
+    @RenderSection("styles", required: false)
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿@using Class_09;
+@model Class_09.PaginatedList<Class_09.Models.Employee>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="card mt-4 mb-4 p-2">
+        <div class="card-header">
+            <h2 class="card-title">Employee List</h2>
+            <div class="row">
+                <div class="col-3">
+                    @if(ViewBag.Count != null)
+                    {
+                        <h6>Total @ViewBag.Count data found</h6>
+                    }
+                </div>
+                <div class="col-9">
+                    <form asp-controller="Home" asp-actio="Index" method="post">
+                        <input type="text" class="form-control me-2" name="usertext" placeholder="Search...."/>
+                        <button class="btn btn-outline-secondary btn-sm me-2 " type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped table-sm table-responsive-sm">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Employee Name)</th>
+                        <th>Employee Status)</th>
+                        <th>Salary)</th>
+                        <th>Pay Basis)</th>
+                        <th>Position Title)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(x=>item.EmployeeName)</td>
+                            <td>@Html.DisplayFor(x=>item.EmployeeStatus)</td>
+                            <td>@Html.DisplayFor(x=>item.Salary)</td>
+                            <td>@Html.DisplayFor(x=>item.PayBasis)</td>
+                            <td>@Html.DisplayFor(x=>item.PositionTitle)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
