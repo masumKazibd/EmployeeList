@@ -2,13 +2,15 @@
 @model Class_09.PaginatedList<Class_09.Models.Employee>
 @{
     ViewData["Title"] = "Index";
+    //for pagination
     int cp = Model.PageIndex; //current page
     int tp = Model.TotalPages; //total page
     var next = Model.HasNextPage ? "" : "disabled"; //disabled from bootstraped
+    var prev = Model.HasPreviousPage ? "" : "disabled";
     int i = (cp - 1) * ViewBag.pSize + 1;
 }
 
-<div class="row">
+<div>
     <div class="card mt-4 mb-4 p-2">
         <div class="card-header">
             <h2 class="card-title">Employee List</h2>
@@ -64,6 +66,59 @@
                     }
                 </tbody>
             </table>
+            <ul class="pagination">
+                <li class="">
+                    <a asp-action="Index" asp-controller="Home" asp-route-sortOrder="@ViewBag.sortParam" asp-route-usertext="@ViewBag.sword" asp-route-page="1" class="btn btn-primary btn-sm">First</a>
+                </li>
+                <li class="page-item @prev">
+                    <a asp-action="Index" asp-controller="Home" asp-route-sortOrder="@ViewBag.sortParam" asp-route-usertext="@ViewBag.sword" asp-route-page="(cp-1)" class="btn btn-primary btn-sm">Prev</a>
+                </li>
+                @for (int k = 1; k < Model.TotalPages; k++)
+                {
+                    if (k >= cp - 5 && k <= cp + 5)
+                    {
+
+                        if (k == cp)
+                        {
+                            <li class="page-item @(k==cp?"active":"")">
+                                <a asp-action="Index" asp-controller="Home" asp-route-sortOrder="@ViewBag.sortParam" asp-route-usertext="@ViewBag.sword" asp-route-page="@k" class="btn btn-success btn-sm">@k</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item @(k==cp?"active":"")">
+                                <a asp-action="Index" asp-controller="Home" asp-route-sortOrder="@ViewBag.sortParam" asp-route-usertext="@ViewBag.sword" asp-route-page="@k" class="btn btn-success btn-sm">@k</a>
+                            </li>
+                        }
+
+
+                        <li class="page-item @prev">
+                            <a asp-action="Index" asp-controller="Home" asp-route-sortOrder="@ViewBag.sortParam" asp-route-usertext="@ViewBag.sword" asp-route-page="@k" class="btn btn-success btn-sm">@k</a>
+                        </li>
+                    }
+
+                }
+                <li class="page-item @next">
+                    <a asp-action="Index" asp-controller="Home" asp-route-sortOrder="@ViewBag.sortParam" asp-route-usertext="@ViewBag.sword" asp-route-page="(cp+1)" class="btn btn-primary btn-sm">Next</a>
+                </li>
+                <li class="">
+                    <a asp-action="Index" asp-controller="Home" asp-route-sortOrder="@ViewBag.sortParam" asp-route-usertext="@ViewBag.sword" asp-route-page="@Model.TotalPage" class="btn btn-primary btn-sm">Last</a>
+                </li>
+
+            </ul>
+                @* <ul class="pagination">
+                    <li class="page-item disabled">
+                        <span class="page-link">Previous</span>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">2</span>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul> *@
         </div>
     </div>
 </div>
